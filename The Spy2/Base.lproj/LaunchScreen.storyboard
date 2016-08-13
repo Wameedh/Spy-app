@@ -1,0 +1,65 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="10117" systemVersion="15F34" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" launchScreen="YES" useTraitCollections="YES" initialViewController="01J-lp-oVM">
+    <dependencies>
+        <deployment identifier="iOS"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="10085"/>
+        <capability name="Constraints to layout margins" minToolsVersion="6.0"/>
+    </dependencies>
+    <scenes>
+        <!--View Controller-->
+        <scene sceneID="EHf-IW-A2E">
+            <objects>
+                <viewController id="01J-lp-oVM" sceneMemberID="viewController">
+                    <layoutGuides>
+                        <viewControllerLayoutGuide type="top" id="Llm-lL-Icb"/>
+                        <viewControllerLayoutGuide type="bottom" id="xb3-aO-Qok"/>
+                    </layoutGuides>
+                    <view key="view" contentMode="scaleToFill" id="Ze5-6b-2t3">
+                        <rect key="frame" x="0.0" y="0.0" width="600" height="600"/>
+                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <subviews>
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Find The Spy" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="abU-a5-ZWl">
+                                <rect key="frame" x="181" y="191" width="239" height="50"/>
+                                <fontDescription key="fontDescription" name="MalayalamSangamMN-Bold" family="Malayalam Sangam MN" pointSize="42"/>
+                                <color key="textColor" cocoaTouchSystemColor="darkTextColor"/>
+                                <nil key="highlightedColor"/>
+                            </label>
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="2016 Wameedh Mohammed Ali." textAlignment="center" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="C6Y-5S-JSr">
+                                <rect key="frame" x="50" y="559" width="500" height="21"/>
+                                <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                                <color key="textColor" cocoaTouchSystemColor="darkTextColor"/>
+                                <nil key="highlightedColor"/>
+                            </label>
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="🕵" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="JLX-9f-I9p">
+                                <rect key="frame" x="275" y="249" width="50" height="60"/>
+                                <fontDescription key="fontDescription" type="system" pointSize="50"/>
+                                <color key="textColor" cocoaTouchSystemColor="darkTextColor"/>
+                                <nil key="highlightedColor"/>
+                            </label>
+                        </subviews>
+                        <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="calibratedWhite"/>
+                        <constraints>
+                            <constraint firstItem="abU-a5-ZWl" firstAttribute="centerY" secondItem="Ze5-6b-2t3" secondAttribute="centerY" constant="-84" id="4k5-RU-FmC"/>
+                            <constraint firstAttribute="trailingMargin" secondItem="C6Y-5S-JSr" secondAttribute="trailing" id="Bh9-vp-41C"/>
+                            <constraint firstItem="abU-a5-ZWl" firstAttribute="centerX" secondItem="Ze5-6b-2t3" secondAttribute="centerX" id="PkL-XT-hag"/>
+                            <constraint firstItem="JLX-9f-I9p" firstAttribute="top" secondItem="abU-a5-ZWl" secondAttribute="bottom" constant="8" symbolic="YES" id="hKT-mg-Lo6"/>
+                            <constraint firstItem="C6Y-5S-JSr" firstAttribute="leading" secondItem="Ze5-6b-2t3" secondAttribute="leadingMargin" id="j6x-TF-dNQ"/>
+                            <constraint firstItem="JLX-9f-I9p" firstAttribute="centerX" secondItem="abU-a5-ZWl" secondAttribute="centerX" id="jGo-kN-Ymh"/>
+                            <constraint firstAttribute="bottom" secondItem="C6Y-5S-JSr" secondAttribute="bottom" constant="20" symbolic="YES" id="jiK-7C-LN1"/>
+                            <constraint firstItem="C6Y-5S-JSr" firstAttribute="leading" secondItem="Ze5-6b-2t3" secondAttribute="leadingMargin" constant="30" id="kSD-ay-c9X"/>
+                            <constraint firstAttribute="trailingMargin" secondItem="C6Y-5S-JSr" secondAttribute="trailing" constant="30" id="l6s-0V-gou"/>
+                        </constraints>
+                        <variation key="default">
+                            <mask key="constraints">
+                                <exclude reference="Bh9-vp-41C"/>
+                                <exclude reference="j6x-TF-dNQ"/>
+                            </mask>
+                        </variation>
+                    </view>
+                </viewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="iYj-Kq-Ea1" userLabel="First Responder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="53" y="363"/>
+        </scene>
+    </scenes>
+</document>
