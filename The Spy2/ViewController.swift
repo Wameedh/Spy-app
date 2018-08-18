@@ -17,7 +17,7 @@ class ViewController: UIViewController {
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        gradientLayer(view, topColor: UIColor.lightGry(), bottomColor: UIColor.gry(), location: 1.0)
+        gradientLayer(view: view, topColor: UIColor.lightGry(), bottomColor: UIColor.gry(), location: 1.0)
         
     }
 
@@ -44,23 +44,37 @@ class ViewController: UIViewController {
   
     
     @IBAction func didTapNumber(sender: AnyObject) {
+        
         totalPlayers = sender.tag
+        
         if  settings == .oneSpy {
             numberOfSpies = 1
         }else {
-        numberOfSpies = numberOfSpiesForNumberOfPlayers(totalPlayers)
+            numberOfSpies = numberOfSpiesForNumberOfPlayers(numberOfPlayers: totalPlayers)
         }
-        self.performSegueWithIdentifier( "push" , sender: self)
+//        self.performSegue(withIdentifier: "push", sender: self)
+        
+        performSegue(withIdentifier: "push", sender: self)
    }
     
-    
-    override func prepareForSegue(segue: UIStoryboardSegue, sender: AnyObject?) {
-        if let destinationVC = segue.destinationViewController as? GameVC, spiesNumber = numberOfSpies {
-            destinationVC.generateRandomWords(totalPlayers, spies: spiesNumber)
-            destinationVC.separaterSpiesFromPlayers(spiesNumber)
+    override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
+        if segue.identifier == "push"{
+            let destinationVC = segue.destination as? GameVC
+            let spiesNumber = numberOfSpies
             
+            destinationVC?.generateRandomWords(totalPlayers: totalPlayers, spies: spiesNumber!)
+            destinationVC?.separaterSpiesFromPlayers(spiesNumber: spiesNumber!)
+                
         }
-        
     }
-
+//     func prepareForSegue(segue: UIStoryboardSegue, sender: AnyObject?) {
+//        if let destinationVC = segue.destination as? GameVC, let spiesNumber = numberOfSpies {
+//            print("OK")
+//            destinationVC.generateRandomWords(totalPlayers: totalPlayers, spies: spiesNumber)
+//            destinationVC.separaterSpiesFromPlayers(spiesNumber: spiesNumber)
+//
+//        }
+//
+//    }
+    
 }

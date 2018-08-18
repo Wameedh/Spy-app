@@ -48,30 +48,31 @@ class GameVC: UIViewController {
         
         
         // create the alert
-        if let spiesNumber = numberOfSpies, goodPlayersNumber = numberOfPlayers {
-            let alert = UIAlertController(title: "\(title)/\(goodPlayersNumber) Players", message: " There will be \(goodPlayersNumber - spiesNumber) GOOD GUYS and \(spiesNumber) \(spy)", preferredStyle: UIAlertControllerStyle.Alert)
+        if let spiesNumber = numberOfSpies, let goodPlayersNumber = numberOfPlayers {
+            let alert = UIAlertController(title: "\(title)/\(goodPlayersNumber) Players", message: " There will be \(goodPlayersNumber - spiesNumber) GOOD GUYS and \(spiesNumber) \(spy)", preferredStyle: UIAlertControllerStyle.alert)
             
             // add an action (button)
-            alert.addAction(UIAlertAction(title: "START", style: UIAlertActionStyle.Default, handler: nil))
+            alert.addAction(UIAlertAction(title: "START", style: UIAlertActionStyle.default, handler: nil))
             alert.view.tintColor = UIColor.flammingoRed()
             // show the alert
-            self.presentViewController(alert, animated: true, completion: nil)
+            self.present(alert, animated: true, completion: nil)
         }
     }
 
     override func viewDidLoad() {
         super.viewDidLoad()
         alert()
-        gradientLayer(view, topColor: UIColor.lightGry(), bottomColor: UIColor.gry(),  location: 1.0)
-        gradientLayer(revealWordView, topColor: UIColor.lightGry() , bottomColor: UIColor.gry(), location: 1.5)
-        let backgroundImage = UIImageView(frame: CGRectMake(50, 75, 275, 200))
+        gradientLayer(view: view, topColor: UIColor.lightGry(), bottomColor: UIColor.gry(),  location: 1.0)
+        gradientLayer(view: revealWordView, topColor: UIColor.lightGry() , bottomColor: UIColor.gry(), location: 1.5)
+        let backgroundImage = UIImageView(frame: CGRect(x: 50, y: 75, width: 275, height: 200))
         backgroundImage.image = UIImage(named: "TOP SECRET")
-        self.revealWordView.insertSubview(backgroundImage, atIndex: 1)
+        self.revealWordView.insertSubview(backgroundImage, at: 1)
 
     }
     
   func generateRandomWords(totalPlayers: Int, spies: Int) {
-      randomWordArray = words.player(totalPlayers, totalSpies: spies)
+    randomWordArray = words.player(total: totalPlayers, totalSpies: spies)
+    
       numberOfPlayers = totalPlayers
       numberOfSpies = spies
     }
@@ -99,30 +100,30 @@ class GameVC: UIViewController {
 
     
     func configureWordLableAfterRevealTheWordButtonPressed(){
-        let randomWord = random() % randomWordArray.count
-        self.wordLabel.text = randomWordArray.removeAtIndex(randomWord)
-        self.wordLabel.layer.addBorder(UIRectEdge.Bottom, color: UIColor.whiteColor(), thickness: 1.0)
-        self.wordLabel.hidden = false
+        let randomWord = Int(arc4random()) % randomWordArray.count
+        self.wordLabel.text = randomWordArray.remove(at: randomWord)
+        self.wordLabel.layer.addBorder(edge: UIRectEdge.bottom, color: UIColor.white, thickness: 1.0)
+        self.wordLabel.isHidden = false
         // appand the word to arrayWordsForFinalArray
-        arrangeWordsForFinalArray(wordLabel.text!)
+        arrangeWordsForFinalArray(wordToBeAdd: wordLabel.text!)
         
     }
     
-    func animateRevealWordViewAppearing(view: UIView, animateTime: NSTimeInterval) {
+    func animateRevealWordViewAppearing(view: UIView, animateTime: TimeInterval) {
         
         UIView.beginAnimations(nil, context: nil)
-        UIView.setAnimationCurve(UIViewAnimationCurve.Linear)
+        UIView.setAnimationCurve(UIViewAnimationCurve.linear)
         UIView.setAnimationDuration(animateTime)
-        UIView.setAnimationTransition(UIViewAnimationTransition.FlipFromRight, forView: view, cache: false)
+        UIView.setAnimationTransition(UIViewAnimationTransition.flipFromRight, for: view, cache: false)
         UIView.commitAnimations()
         revealWordView.alpha = 1.0
     }
     
     
     func animateRevealWordViewDisappearing() {
-        let seconds : NSTimeInterval = 1
+        let seconds : TimeInterval = 1
         revealWordView.alpha = 1
-        UIView.animateWithDuration(seconds) { () -> Void in
+        UIView.animate(withDuration: seconds) { () -> Void in
             self.revealWordView.alpha = 0
             
         }
@@ -131,7 +132,7 @@ class GameVC: UIViewController {
    
     var countOfPlayers = 1
     @IBAction func revealTheWordButton(sender: UIButton) {
-            animateRevealWordViewAppearing(revealWordView, animateTime: 1)
+        animateRevealWordViewAppearing(view: revealWordView, animateTime: 1)
             configureWordLableAfterRevealTheWordButtonPressed()
             number += 1
     }
@@ -141,7 +142,7 @@ class GameVC: UIViewController {
         revealWordView.alpha = 0
         
         if countOfPlayers == numberOfPlayers && number == 2 {
-            performSegueWithIdentifier("navToPlay", sender: nil)
+            performSegue(withIdentifier: "navToPlay", sender: nil)
         }
         else if number == 2 {
             configureWordLableAfterGotItButtonPressed()
@@ -158,7 +159,7 @@ class GameVC: UIViewController {
 
     func changingPlayerImage() {
         //This function start counted from 2 till the total number of Players. It used in the GotItButton to retrive the image of each player acurding to the player number.
-        if num < numberOfPlayers && number == 2 {
+        if num < numberOfPlayers! && number == 2 {
             num += 1
         }
         playerImage.image = UIImage(named: "Player-\(num)")
@@ -167,21 +168,24 @@ class GameVC: UIViewController {
     
     
     func configureWordLableAfterGotItButtonPressed(){
-        self.wordLabel.hidden = true
+        self.wordLabel.isHidden = true
     }
     
 
     
    
     
-    override func prepareForSegue(segue: UIStoryboardSegue, sender: AnyObject?) {
     
-        if let play = segue.destinationViewController as? PlayVC, let playersNumber = numberOfPlayers {
-            play.numberOfPlayers = playersNumber
-            play.wordsForFinalArray = arrayWordsForFinalArray
-            play.spiesOnly = arrayOfSpiesOnly
-
-        }
+    override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
+//        if segue.identifier == "push"{
+        
+            let play = segue.destination as? PlayVC
+            let playersNumber = numberOfPlayers
+            play?.numberOfPlayers = playersNumber!
+            play?.wordsForFinalArray = arrayWordsForFinalArray
+            play?.spiesOnly = arrayOfSpiesOnly
+            //Data has to be a variable name in your RandomViewController
+//        }
     }
 
 }

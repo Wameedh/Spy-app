@@ -22,8 +22,8 @@ class ModesVC: UIViewController {
     var textForLable: String?
     override func viewDidLoad() {
         super.viewDidLoad()
-        insertSubviewImage("spy",view: modeView,atIndex: 1, x: 30, y: 150, alpha: 0.3, transformX: 15, transformY: 0)
-        gradientLayer(view, topColor: UIColor.lightGry(), bottomColor: UIColor.gry(), location: 1.0)
+        insertSubviewImage(imageName: "spy",view: modeView,atIndex: 1, x: 30, y: 150, alpha: 0.3, transformX: 15, transformY: 0)
+        gradientLayer(view: view, topColor: UIColor.lightGry(), bottomColor: UIColor.gry(), location: 1.0)
         helpModeLable.text = textForLable
         
     }

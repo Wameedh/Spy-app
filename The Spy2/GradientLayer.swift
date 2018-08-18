@@ -12,19 +12,19 @@ extension CAGradientLayer {
     
     func gradientColor(topColor: UIColor, bottomColor: UIColor, location: Float) -> CAGradientLayer {
         
-        let gradientColors: [CGColor] = [topColor.CGColor, bottomColor.CGColor]
+        let gradientColors: [CGColor] = [topColor.cgColor, bottomColor.cgColor]
         let gradientLocations: [Float] = [0.0, location]
         
         let gradientLayer: CAGradientLayer = CAGradientLayer()
         gradientLayer.colors = gradientColors
-        gradientLayer.locations = gradientLocations
+        gradientLayer.locations = gradientLocations as [NSNumber]
         
         return gradientLayer
     }
 }
 
 func gradientLayer(view: UIView, topColor: UIColor, bottomColor: UIColor,  location: Float){
-    let background = CAGradientLayer().gradientColor(topColor, bottomColor: bottomColor, location: location)
+    let background = CAGradientLayer().gradientColor(topColor: topColor, bottomColor: bottomColor, location: location)
     background.frame = view.bounds
-    view.layer.insertSublayer(background, atIndex: 0)
+    view.layer.insertSublayer(background, at: 0)
 }

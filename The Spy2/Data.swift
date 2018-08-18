@@ -112,29 +112,29 @@ struct WordGroups {
 
     
     func player(total:Int, totalSpies:Int)->[String] {
-        srandom(UInt32(time(nil))) // seed the random generator w/ time?
-        let categoryNumber = random() % array3dCatugoryOfWords.count
+        srandom(UInt32(Int(time(nil)))) // seed the random generator w/ time?
+        let categoryNumber = Int(arc4random()) % array3dCatugoryOfWords.count
         var allPlayers = [String]()
         var players = array3dCatugoryOfWords[categoryNumber][0]
         var spies: [String] = ["YOU ARE A SPY!","YOU ARE A SPY","YOU ARE A SPY","YOU ARE A SPY"]
         
         func appendingPlayersWords() {
             for _ in 0..<total  - totalSpies {
-                let playerNumber = random() % players.count
-                allPlayers.append(players.removeAtIndex(playerNumber))
+                let playerNumber = Int(arc4random()) % players.count
+                allPlayers.append(players.remove(at: playerNumber))
             }
         }
         func appendingSpiesWords(){
             for _ in 0..<totalSpies {
-                let spyNumber = random() % spies.count
-                allPlayers.append(spies.removeAtIndex(spyNumber))
+                let spyNumber = Int(arc4random()) % spies.count
+                allPlayers.append(spies.remove(at: spyNumber))
             }
         }
        
         
         switch settings {
         case .sameWords:
-            let playerNumber = random() % players.count
+            let playerNumber = Int(arc4random()) % players.count
             for _ in 0..<total  - totalSpies {
                 allPlayers.append(players[playerNumber])
             }
@@ -147,14 +147,14 @@ struct WordGroups {
             appendingPlayersWords()
             appendingSpiesWords()
         case .oneSpy:
-            let playerNumber = random() % players.count
+            let playerNumber = Int(arc4random()) % players.count
             for _ in 0..<total  - 1 {
                 allPlayers.append(players[playerNumber])
             }
             
             for _ in 0..<1 {
-                let spyNumber = random() % spies.count
-                allPlayers.append(spies.removeAtIndex(spyNumber))
+                let spyNumber = Int(arc4random()) % spies.count
+                allPlayers.append(spies.remove(at: spyNumber))
             }
             
         }
@@ -168,7 +168,7 @@ struct WordGroups {
 
 func insertSubviewImage(imageName: String, view: UIView, atIndex: Int, x: CGFloat, y: CGFloat, alpha: CGFloat, transformX: CGFloat, transformY: CGFloat)-> Void {
     
-    let backgroundImage = UIImageView(frame: CGRectMake(x, y, 0, 0))
+    let backgroundImage = UIImageView(frame: CGRect(x: x, y: y, width: 0, height: 0))
     backgroundImage.image = UIImage(named: imageName)
     backgroundImage.sizeToFit()
     backgroundImage.alpha = alpha
@@ -177,12 +177,12 @@ func insertSubviewImage(imageName: String, view: UIView, atIndex: Int, x: CGFloa
         // Desired point from the center to rotate around
         let tx = transformX
         let ty = transformY
-        var transform = CGAffineTransformMakeTranslation(tx, ty)
-        transform = CGAffineTransformRotate(transform, CGFloat(M_PI_4))
-        transform = CGAffineTransformTranslate(transform,-tx,-ty)
+        var transform = CGAffineTransform(translationX: tx, y: ty)
+        transform = CGAffineTransform.init(rotationAngle: CGFloat(Double.pi / 4))
+        transform = CGAffineTransform.init(translationX: -tx, y: -ty)
         backgroundImage.transform = transform
     }
-    return view.insertSubview(backgroundImage, atIndex: atIndex)
+    return view.insertSubview(backgroundImage, at: atIndex)
 }
 
 
@@ -192,24 +192,21 @@ extension CALayer {
         
         let border = CALayer()
         
+
         switch edge {
-        case UIRectEdge.Top:
-            border.frame = CGRectMake(0, 0, CGRectGetHeight(self.frame), thickness)
-            break
-        case UIRectEdge.Bottom:
-            border.frame = CGRectMake(0, CGRectGetHeight(self.frame) - thickness, CGRectGetWidth(self.frame), thickness)
-            break
-        case UIRectEdge.Left:
-            border.frame = CGRectMake(0, 0, thickness, CGRectGetHeight(self.frame))
-            break
-        case UIRectEdge.Right:
-            border.frame = CGRectMake(CGRectGetWidth(self.frame) - thickness, 0, thickness, CGRectGetHeight(self.frame))
-            break
+        case .top:
+            border.frame = CGRect(x: 0, y: 0, width: frame.width, height: thickness)
+        case .bottom:
+            border.frame = CGRect(x: 0, y: frame.height - thickness, width: frame.width, height: thickness)
+        case .left:
+            border.frame = CGRect(x: 0, y: 0, width: thickness, height: frame.height)
+        case .right:
+            border.frame = CGRect(x: frame.width - thickness, y: 0, width: thickness, height: frame.height)
         default:
             break
         }
         
-        border.backgroundColor = color.CGColor;
+        border.backgroundColor = color.cgColor;
         
         self.addSublayer(border)
     }

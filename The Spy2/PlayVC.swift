@@ -10,9 +10,10 @@ import UIKit
 
 class PlayVC: UIViewController {
 
+   
     override func viewDidLoad() {
         super.viewDidLoad()
-        gradientLayer(view, topColor: UIColor.lightGry(), bottomColor: UIColor.gry(), location: 1.0)
+        gradientLayer(view: view, topColor: UIColor.lightGry(), bottomColor: UIColor.gry(), location: 1.0)
         self.navigationController?.setNavigationBarHidden(true, animated: true)
         // Do any additional setup after loading the view.
     }
@@ -25,12 +26,15 @@ class PlayVC: UIViewController {
     var numberOfPlayers: Int = 0
     var wordsForFinalArray: [String] = []
     var spiesOnly: [String] = []
-    override func prepareForSegue(segue: UIStoryboardSegue, sender: AnyObject?) {
-        if let play = segue.destinationViewController as? TableVC {
-            play.numberOfplayersForCells(numberOfPlayers)
-            play.WordsForFinalArray(wordsForFinalArray)
-            play.configureSpyArry(spiesOnly)
-        }
+    
+    override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
+//        if let play = segue.destination as? TableVC {
+        
+        let play = segue.destination as? TableVC
+        play?.numberOfplayersForCells(n: numberOfPlayers)
+        play?.WordsForFinalArray(wordToBeAdd: wordsForFinalArray)
+        play?.configureSpyArry(spiesWords: spiesOnly)
+//        }
     }
 
 }

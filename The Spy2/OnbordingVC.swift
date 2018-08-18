@@ -17,7 +17,7 @@ class OnBordingVC: UIViewController {
     
     override func viewDidLoad() {
         
-        gradientLayer(view, topColor: UIColor.lightGry(), bottomColor: UIColor.gry(), location: 1.0)
+        gradientLayer(view: view, topColor: UIColor.lightGry(), bottomColor: UIColor.gry(), location: 1.0)
         
         self.navigationController?.setNavigationBarHidden(true, animated: true)
     
@@ -28,15 +28,15 @@ class OnBordingVC: UIViewController {
         
         switch sender.tag {
         case 0:
-            performSegueWithIdentifier("zero", sender: nil)
+            performSegue(withIdentifier: "zero", sender: nil)
         case 1:
-            performSegueWithIdentifier("one", sender: nil)
+            performSegue(withIdentifier: "one", sender: nil)
         case 2:
-            performSegueWithIdentifier("two", sender: nil)
+            performSegue(withIdentifier: "two", sender: nil)
         case 3:
-            performSegueWithIdentifier("three", sender: nil)
+            performSegue(withIdentifier: "three", sender: nil)
         case 4:
-            performSegueWithIdentifier("fore", sender: nil)
+            performSegue(withIdentifier: "fore", sender: nil)
         default:
             break
         }
@@ -46,10 +46,10 @@ class OnBordingVC: UIViewController {
     @IBAction func Skip(sender: AnyObject) {
         
         
-        NSUserDefaults.standardUserDefaults().setBool(true, forKey: onbording)
+        UserDefaults.standard.set(true, forKey: onbording)
         
-      let ad =  UIApplication.sharedApplication().delegate as! AppDelegate
-            ad.runStoryboard(main)
+        let ad =  UIApplication.shared.delegate as! AppDelegate
+        ad.runStoryboard(Story: main)
         
     }
     

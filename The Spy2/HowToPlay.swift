@@ -20,16 +20,16 @@ class HowToPlay: UIViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
      
-        gradientLayer(view, topColor: UIColor.lightGry(), bottomColor: UIColor.gry(), location: 1.0)
+        gradientLayer(view: view, topColor: UIColor.lightGry(), bottomColor: UIColor.gry(), location: 1.0)
         
-        insertSubviewImage("unclassified",view: helpView,atIndex: 0, x: -190, y: 420, alpha: 0.3, transformX: 1, transformY: 0)
-        insertSubviewImage("secret-agent",view: helpView,atIndex: 0, x: 120, y:10, alpha: 0.2, transformX: 5, transformY: 0)
+        insertSubviewImage(imageName: "unclassified",view: helpView,atIndex: 0, x: -190, y: 420, alpha: 0.3, transformX: 1, transformY: 0)
+        insertSubviewImage(imageName: "secret-agent",view: helpView,atIndex: 0, x: 120, y:10, alpha: 0.2, transformX: 5, transformY: 0)
         
         let myString = self.instructionsLable.text!
         let myMutableString = NSMutableAttributedString(string: myString)
         let attri = [
-                      NSForegroundColorAttributeName: UIColor.flammingoRed(),
-                      NSFontAttributeName: UIFont.boldSystemFontOfSize(18),
+                      NSAttributedStringKey.foregroundColor: UIColor.flammingoRed(),
+                      NSAttributedStringKey.font: UIFont.boldSystemFont(ofSize: 18),
                       ]
       myMutableString.addAttributes(attri, range: NSRange(location: 0, length: 13))
       myMutableString.addAttributes(attri, range: NSRange(location: 242, length: 9))

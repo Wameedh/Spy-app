@@ -12,22 +12,21 @@ class HowToPlayTVC: UITableViewController {
 
     override func viewDidLoad() {
         super.viewDidLoad()
-        insertSubviewImage("unclassified",view: self.tableView,atIndex: 1, x: 30, y: 150, alpha: 0.3, transformX: 15, transformY: 0)
-        gradientLayer(view, topColor: UIColor.lightGry(), bottomColor: UIColor.gry(), location: 1.0)
+        insertSubviewImage(imageName: "unclassified",view: self.tableView,atIndex: 1, x: 30, y: 150, alpha: 0.3, transformX: 15, transformY: 0)
+        gradientLayer(view: view, topColor: UIColor.lightGry(), bottomColor: UIColor.gry(), location: 1.0)
     }
 
     var cellIndex: Int?
-    override func tableView(tableView: UITableView, didSelectRowAtIndexPath indexPath: NSIndexPath) {
-        
-        let cell = tableView.cellForRowAtIndexPath(indexPath)
+    override func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath){
+        let cell = tableView.cellForRow(at: indexPath as IndexPath)
         
         if cell?.textLabel?.text == "Instruction and How to Play" {
-        self.performSegueWithIdentifier("navToHowToPlay", sender: self)
+            self.performSegue(withIdentifier: "navToHowToPlay", sender: self)
             
             
         } else {
             cellIndex = indexPath.row
-            self.performSegueWithIdentifier("navToSameWordsMode", sender: self)
+            self.performSegue(withIdentifier: "navToSameWordsMode", sender: self)
         }
         
     }
@@ -39,20 +38,20 @@ class HowToPlayTVC: UITableViewController {
 
     // MARK: - Table view data source
 
-    override func numberOfSectionsInTableView(tableView: UITableView) -> Int {
-        // #warning Incomplete implementation, return the number of sections
+ 
+    override func numberOfSections(in tableView: UITableView) -> Int {
         return 1
     }
-
-    override func tableView(tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
+    
+     override func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
         // #warning Incomplete implementation, return the number of rows
         return 5
     }
 
     
     
-    override func tableView(tableView: UITableView, cellForRowAtIndexPath indexPath: NSIndexPath) -> UITableViewCell {
-        let cell = tableView.dequeueReusableCellWithIdentifier("helpCell", forIndexPath: indexPath)
+    override func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
+        let cell = tableView.dequeueReusableCell(withIdentifier: "helpCell", for: indexPath as IndexPath)
 
         // Configure the cell...
         if indexPath.row == 0 {
@@ -67,7 +66,7 @@ class HowToPlayTVC: UITableViewController {
             cell.textLabel?.text = "One Spy Mode"
         }
         
-        
+        cell.layer.zPosition = 1
         return cell
     }
 
@@ -75,9 +74,10 @@ class HowToPlayTVC: UITableViewController {
     // MARK: - Navigation
 
     // In a storyboard-based application, you will often want to do a little preparation before navigation
-    override func prepareForSegue(segue: UIStoryboardSegue, sender: AnyObject?) {
+//    func prepareForSegue(segue: UIStoryboardSegue, sender: AnyObject?) {
+    override func prepare(for segue: UIStoryboardSegue, sender: Any?){
         
-        if let destinationVC = segue.destinationViewController as? ModesVC {
+        if let destinationVC = segue.destination as? ModesVC {
             if cellIndex == 1 {
                 destinationVC.title = "Same Words Mode"
                 destinationVC.textForLable = "Good Guys get the same words…. Spies get nothing.\n"+"-Easier Mode"

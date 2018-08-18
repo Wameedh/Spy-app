@@ -15,17 +15,18 @@ import UIKit
     @IBOutlet weak var lableForPlayerInCell: UILabel!
     @IBOutlet weak var imageForCell: UIImageView!
     
+    
     func riceive(lableText: String) {
     lableForPlayerInCell.text = lableText
      
     }
-    
  
     override func awakeFromNib() {
         super.awakeFromNib()
+        self.layer.zPosition = 1
     }
 
-    override func setSelected(selected: Bool, animated: Bool) {
+    override func setSelected(_ selected: Bool, animated: Bool) {
         super.setSelected(selected, animated: animated)
         
         // Configure the view for the selected state

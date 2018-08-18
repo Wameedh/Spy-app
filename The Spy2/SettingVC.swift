@@ -8,7 +8,7 @@
 
 import UIKit
 
-var settings = SettingsState.settings(NSUserDefaults.standardUserDefaults().integerForKey("switchState"))
+var settings = SettingsState.settings(value: UserDefaults.standard.integer(forKey: "switchState"))
 
 enum SettingsState:Int {
     case sameWords = 1
@@ -45,15 +45,15 @@ class SettingVC: UIViewController {
     
     
     func switchs() {
-        sameWordsSW.on = settings.switchOn(for: .sameWords)
-        spiesWithNoWordsSW.on = settings.switchOn(for: .noWords)
-        wordCategurySW.on = settings.switchOn(for: .wordCategury)
-        oneWordModeSW.on = settings.switchOn(for: .oneSpy)
+        sameWordsSW.isOn = settings.switchOn(for: .sameWords)
+        spiesWithNoWordsSW.isOn = settings.switchOn(for: .noWords)
+        wordCategurySW.isOn = settings.switchOn(for: .wordCategury)
+        oneWordModeSW.isOn = settings.switchOn(for: .oneSpy)
         
-        sameWordsSW.userInteractionEnabled = settings.enabled(for: .sameWords)
-        spiesWithNoWordsSW.userInteractionEnabled = settings.enabled(for: .noWords)
-        wordCategurySW.userInteractionEnabled = settings.enabled(for: .wordCategury)
-        oneWordModeSW.userInteractionEnabled = settings.enabled(for: .oneSpy)
+        sameWordsSW.isUserInteractionEnabled = settings.enabled(for: .sameWords)
+        spiesWithNoWordsSW.isUserInteractionEnabled = settings.enabled(for: .noWords)
+        wordCategurySW.isUserInteractionEnabled = settings.enabled(for: .wordCategury)
+        oneWordModeSW.isUserInteractionEnabled = settings.enabled(for: .oneSpy)
         
     }
     
@@ -76,19 +76,19 @@ class SettingVC: UIViewController {
             message = "Spy, I’m sorry, at this point know the rest of your friends hate you. Your alone and no matter how many players are chosen you’ll always be alone.  Good Guys this will either be the easiest game to win or the most annoying and painful experience of your life. To find out one person is better than all of you.\n"+"-This mode may cause real murder"
         }
         
-        let alert = UIAlertController(title: "\(title)", message: "\(message)", preferredStyle: UIAlertControllerStyle.Alert)
+        let alert = UIAlertController(title: "\(title)", message: "\(message)", preferredStyle: UIAlertControllerStyle.alert)
         
         // add an action (button)
-        alert.addAction(UIAlertAction(title: "OK", style: UIAlertActionStyle.Default, handler: nil))
+        alert.addAction(UIAlertAction(title: "OK", style: UIAlertActionStyle.default, handler: nil))
         alert.view.tintColor = UIColor.flammingoRed()
         // show the alert
-        self.presentViewController(alert, animated: true, completion: nil)
+        self.present(alert, animated: true, completion: nil)
     }
     
     @IBAction func switchTaped(sender: AnyObject) {
         
-        NSUserDefaults.standardUserDefaults().setInteger(sender.tag, forKey: "switchState")
-        settings = SettingsState.settings(sender.tag)
+        UserDefaults.standard.set(sender.tag, forKey: "switchState")
+        settings = SettingsState.settings(value: sender.tag)
         switchs()
         modeInfoAlert()
         
@@ -97,8 +97,8 @@ class SettingVC: UIViewController {
     
     override func viewDidLoad() {
         super.viewDidLoad()
-         insertSubviewImage("secret-agent",view: self.view,atIndex: 1, x: 30, y: 150, alpha: 0.2, transformX: 15, transformY: 0)
-        gradientLayer(view, topColor: UIColor.lightGry(), bottomColor: UIColor.gry(), location: 1.0)
+        insertSubviewImage(imageName: "secret-agent",view: self.view,atIndex: 1, x: 30, y: 150, alpha: 0.2, transformX: 15, transformY: 0)
+        gradientLayer(view: view, topColor: UIColor.lightGry(), bottomColor: UIColor.gry(), location: 1.0)
         switchs()
         
         // Do any additional setup after loading the view.
