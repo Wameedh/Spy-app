@@ -76,10 +76,10 @@ class SettingVC: UIViewController {
             message = "Spy, I’m sorry, at this point know the rest of your friends hate you. Your alone and no matter how many players are chosen you’ll always be alone.  Good Guys this will either be the easiest game to win or the most annoying and painful experience of your life. To find out one person is better than all of you.\n"+"-This mode may cause real murder"
         }
         
-        let alert = UIAlertController(title: "\(title)", message: "\(message)", preferredStyle: UIAlertControllerStyle.alert)
+        let alert = UIAlertController(title: "\(title)", message: "\(message)", preferredStyle: UIAlertController.Style.alert)
         
         // add an action (button)
-        alert.addAction(UIAlertAction(title: "OK", style: UIAlertActionStyle.default, handler: nil))
+        alert.addAction(UIAlertAction(title: "OK", style: UIAlertAction.Style.default, handler: nil))
         alert.view.tintColor = UIColor.flammingoRed()
         // show the alert
         self.present(alert, animated: true, completion: nil)

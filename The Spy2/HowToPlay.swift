@@ -28,8 +28,8 @@ class HowToPlay: UIViewController {
         let myString = self.instructionsLable.text!
         let myMutableString = NSMutableAttributedString(string: myString)
         let attri = [
-                      NSAttributedStringKey.foregroundColor: UIColor.flammingoRed(),
-                      NSAttributedStringKey.font: UIFont.boldSystemFont(ofSize: 18),
+                      NSAttributedString.Key.foregroundColor: UIColor.flammingoRed(),
+                      NSAttributedString.Key.font: UIFont.boldSystemFont(ofSize: 18),
                       ]
       myMutableString.addAttributes(attri, range: NSRange(location: 0, length: 13))
       myMutableString.addAttributes(attri, range: NSRange(location: 242, length: 9))

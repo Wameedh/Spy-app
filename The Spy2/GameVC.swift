@@ -49,10 +49,10 @@ class GameVC: UIViewController {
         
         // create the alert
         if let spiesNumber = numberOfSpies, let goodPlayersNumber = numberOfPlayers {
-            let alert = UIAlertController(title: "\(title)/\(goodPlayersNumber) Players", message: " There will be \(goodPlayersNumber - spiesNumber) GOOD GUYS and \(spiesNumber) \(spy)", preferredStyle: UIAlertControllerStyle.alert)
+            let alert = UIAlertController(title: "\(title)/\(goodPlayersNumber) Players", message: " There will be \(goodPlayersNumber - spiesNumber) GOOD GUYS and \(spiesNumber) \(spy)", preferredStyle: UIAlertController.Style.alert)
             
             // add an action (button)
-            alert.addAction(UIAlertAction(title: "START", style: UIAlertActionStyle.default, handler: nil))
+            alert.addAction(UIAlertAction(title: "START", style: UIAlertAction.Style.default, handler: nil))
             alert.view.tintColor = UIColor.flammingoRed()
             // show the alert
             self.present(alert, animated: true, completion: nil)
@@ -112,9 +112,9 @@ class GameVC: UIViewController {
     func animateRevealWordViewAppearing(view: UIView, animateTime: TimeInterval) {
         
         UIView.beginAnimations(nil, context: nil)
-        UIView.setAnimationCurve(UIViewAnimationCurve.linear)
+        UIView.setAnimationCurve(UIView.AnimationCurve.linear)
         UIView.setAnimationDuration(animateTime)
-        UIView.setAnimationTransition(UIViewAnimationTransition.flipFromRight, for: view, cache: false)
+        UIView.setAnimationTransition(UIView.AnimationTransition.flipFromRight, for: view, cache: false)
         UIView.commitAnimations()
         revealWordView.alpha = 1.0
     }

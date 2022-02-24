@@ -17,7 +17,9 @@ let onbording = "onbording"
 class AppDelegate: UIResponder, UIApplicationDelegate {
 
     var window: UIWindow?
-    
+    let main = "Main"
+    let onbordingStoryboard = "OnbordingStoryboard"
+    let onbording = "onbording"
     
     func runStoryboard(Story: String) {
         window = UIWindow(frame: UIScreen.main.bounds)
@@ -27,7 +29,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
     }
 
     
-    internal func application(_ application: UIApplication, didFinishLaunchingWithOptions launchOptions: [UIApplicationLaunchOptionsKey : Any]? = nil) -> Bool {
+    internal func application(_ application: UIApplication, didFinishLaunchingWithOptions launchOptions: [UIApplication.LaunchOptionsKey : Any]? = nil) -> Bool {
         // Override point for customization after application launch.
         
         
